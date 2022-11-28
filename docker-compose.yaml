@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  backend:
+    image: maven:3.8.6-openjdk-18-slim
+#    без дебага
+#    command: mvn spring-boot:run
+#    с дебагом на 5005 порту
+    command: mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:5005"
+    ports:
+#     порт для дебага
+      - 5005:5005
+#     порт для приложения
+      - 8080:8080
+    volumes:
+      - .:/usr/src/mymaven:rw
+    working_dir: /usr/src/mymaven
